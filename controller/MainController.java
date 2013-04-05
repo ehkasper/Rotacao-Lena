@@ -4,7 +4,6 @@
  */
 package controller;
 
-import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import javax.swing.ImageIcon;
@@ -47,14 +46,14 @@ public class MainController {
 
     private void setOriginalImage() 
     {
-        BufferedImage bf = transformer.getResizedImage(imagem.getBufferedImage(), view.lblResizebleImage.getWidth(), view.lblResizebleImage.getHeight());
+        BufferedImage bf;
 
         bf = transformer.getResizedImage(imagem.getBufferedImage(), view.lblResizebleImage.getWidth(), view.lblResizebleImage.getHeight());
         view.lblResizebleImage.setIcon( new ImageIcon(bf) );
     }
     
     
-    private void setPBImage() 
+    public void setPBImage() 
     {
         setProcessedImage(transformer.getPBImage());
     }
@@ -66,29 +65,23 @@ public class MainController {
     
     public void transformEspelhada()
     {
-        setProcessedImage(transformer.getEspelhaImagem());
+        setProcessedImage(transformer.getPBImage(transformer.getEspelhaImagem()));
     }
     
     public void transformZoom(double fator)
     {
-        if( fator == 0 )
-        {
-           setProcessedImage(imagem.getBufferedImage());
-           return;
-        }
-        System.out.println(fator);
-        BufferedImage bf = transformer.getZoomImagem(fator);
+        BufferedImage bf = transformer.getPBImage(transformer.getZoomImagem(fator));
         view.lblProcessedImage.setIcon(new ImageIcon(bf));
     }
     
     public void transformTrabalhoDois(float value)
     {
-        setProcessedImage(transformer.getRotatedImage(value));
+        view.lblProcessedImage.setIcon(new ImageIcon( transformer.getRotatedImage(value, view.panelProcessedImage.getWidth(), view.panelProcessedImage.getHeight()) ) );
     }    
     
     private void setProcessedImage(BufferedImage processedImage)
     {
-        view.lblProcessedImage.setIcon(new ImageIcon(transformer.getResizedImage( processedImage, view.panelProcessedImage.getWidth() - 23, view.panelProcessedImage.getHeight() - 23) ));
+        view.lblProcessedImage.setIcon(new ImageIcon(transformer.getResizedImage( processedImage, view.panelProcessedImage.getWidth(), view.panelProcessedImage.getHeight()) ));
     }
     
     public Imagem getImagem()

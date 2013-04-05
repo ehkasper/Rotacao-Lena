@@ -26,6 +26,7 @@ public class Main extends javax.swing.JFrame {
     public Main() {
         initComponents();
         getContentPane().setBackground(Color.WHITE); 
+        setLocationRelativeTo(null);
     }
 
     /** This method is called from within the constructor to
@@ -59,9 +60,11 @@ public class Main extends javax.swing.JFrame {
         btnZoomIn = new javax.swing.JButton();
         btnZoomOut = new javax.swing.JButton();
         btnEspelhar = new javax.swing.JButton();
+        btnOriginal = new javax.swing.JButton();
         lblResizebleImage = new javax.swing.JLabel();
         panelProcessedImage = new javax.swing.JScrollPane();
         lblProcessedImage = new javax.swing.JLabel();
+        btnVerOriginal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Comp. Gráfica");
@@ -69,6 +72,8 @@ public class Main extends javax.swing.JFrame {
         setName("mainFrame"); // NOI18N
         setResizable(false);
 
+        btImageChooser.setBackground(new java.awt.Color(251, 252, 252));
+        btImageChooser.setForeground(new java.awt.Color(35, 44, 44));
         btImageChooser.setText("Escolher Imagem");
         btImageChooser.setToolTipText("Ao clicar, escolha uma imagem a partir de seu computador");
         btImageChooser.addActionListener(new java.awt.event.ActionListener() {
@@ -87,6 +92,7 @@ public class Main extends javax.swing.JFrame {
         panelValues.setOpaque(false);
 
         btnHistograma.setText("Histograma");
+        btnHistograma.setEnabled(false);
         btnHistograma.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistogramaActionPerformed(evt);
@@ -95,19 +101,23 @@ public class Main extends javax.swing.JFrame {
 
         lblTitleMediana.setText("Mediana");
 
+        lblMediana.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMediana.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblMediana.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         lblTitleMedia.setText("Média");
 
+        lblMedia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMedia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblMedia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
+        lblVariancia.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblVariancia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblVariancia.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         lblTitleModa.setText("Moda");
 
+        lblModa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblModa.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         lblModa.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -157,7 +167,7 @@ public class Main extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        lblImagemOriginal.setText("Imagem Original");
+        lblImagemOriginal.setText("Imagem Original em tamanho redimensionado");
 
         lblImagemProcessada.setText("Imagem Processada");
 
@@ -166,6 +176,7 @@ public class Main extends javax.swing.JFrame {
         lblTitleTrabalho1.setText("Trabalho 1");
 
         comboTrabalho1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Selecione", "A", "B", "C", "D", "E" }));
+        comboTrabalho1.setEnabled(false);
         comboTrabalho1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboTrabalho1ActionPerformed(evt);
@@ -174,6 +185,7 @@ public class Main extends javax.swing.JFrame {
 
         lblTitleTrabalho2.setText("Trabalho 2");
 
+        comboAngulo.setEnabled(false);
         comboAngulo.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 comboAnguloStateChanged(evt);
@@ -188,6 +200,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         btnZoomIn.setText("+");
+        btnZoomIn.setEnabled(false);
         btnZoomIn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZoomInActionPerformed(evt);
@@ -195,6 +208,7 @@ public class Main extends javax.swing.JFrame {
         });
 
         btnZoomOut.setText("-");
+        btnZoomOut.setEnabled(false);
         btnZoomOut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnZoomOutActionPerformed(evt);
@@ -202,9 +216,19 @@ public class Main extends javax.swing.JFrame {
         });
 
         btnEspelhar.setText("Espelhar");
+        btnEspelhar.setEnabled(false);
         btnEspelhar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEspelharActionPerformed(evt);
+            }
+        });
+
+        btnOriginal.setText("Ajustar");
+        btnOriginal.setToolTipText("Clique para ajustar a imagem ao seu estado original");
+        btnOriginal.setEnabled(false);
+        btnOriginal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnOriginalActionPerformed(evt);
             }
         });
 
@@ -226,7 +250,9 @@ public class Main extends javax.swing.JFrame {
                 .addComponent(btnZoomIn, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnZoomOut, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(54, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(btnOriginal)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -241,22 +267,35 @@ public class Main extends javax.swing.JFrame {
                     .addComponent(comboAngulo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnZoomIn)
                     .addComponent(btnZoomOut)
-                    .addComponent(btnEspelhar))
+                    .addComponent(btnEspelhar)
+                    .addComponent(btnOriginal))
                 .addContainerGap())
         );
 
-        lblResizebleImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblResizebleImage.setBorder(null);
 
-        panelProcessedImage.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
-        panelProcessedImage.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
+        panelProcessedImage.setBackground(new java.awt.Color(255, 255, 255));
+        panelProcessedImage.setBorder(null);
+        panelProcessedImage.setForeground(new java.awt.Color(255, 255, 255));
+        panelProcessedImage.setViewportBorder(null);
 
-        lblProcessedImage.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        lblProcessedImage.setBackground(new java.awt.Color(255, 255, 255));
+        lblProcessedImage.setBorder(null);
+        lblProcessedImage.setOpaque(true);
         lblProcessedImage.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 lblProcessedImageMouseEntered(evt);
             }
         });
         panelProcessedImage.setViewportView(lblProcessedImage);
+
+        btnVerOriginal.setText("Ver Original");
+        btnVerOriginal.setEnabled(false);
+        btnVerOriginal.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnVerOriginalActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -268,22 +307,28 @@ public class Main extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btImageChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 151, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(fieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(fieldImagePath))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblImagemOriginal)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(lblImagemOriginal)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnVerOriginal))
                             .addComponent(panelValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblResizebleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 412, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(lblImagemProcessada)
-                                    .addComponent(panelProcessedImage, javax.swing.GroupLayout.PREFERRED_SIZE, 434, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                        .addGap(80, 80, 80)))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(47, 47, 47)
+                                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(18, 18, 18)
+                                        .addComponent(lblImagemProcessada)))
+                                .addGap(80, 92, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addComponent(panelProcessedImage)))))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -291,17 +336,18 @@ public class Main extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btImageChooser)
+                    .addComponent(btImageChooser, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(fieldImagePath, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblImagemOriginal)
-                    .addComponent(lblImagemProcessada))
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelProcessedImage, javax.swing.GroupLayout.DEFAULT_SIZE, 377, Short.MAX_VALUE)
-                    .addComponent(lblResizebleImage, javax.swing.GroupLayout.PREFERRED_SIZE, 376, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(lblImagemProcessada)
+                    .addComponent(btnVerOriginal))
+                .addGap(2, 2, 2)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(lblResizebleImage, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelProcessedImage, javax.swing.GroupLayout.DEFAULT_SIZE, 408, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelValues, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -325,6 +371,14 @@ private void btImageChooserActionPerformed(java.awt.event.ActionEvent evt) {//GE
     {
         zoom = 0;
         controller = new MainController(this, fileChooser.getSelectedFile());
+        btnEspelhar.setEnabled(true);
+        btnHistograma.setEnabled(true);
+        btnOriginal.setEnabled(true);
+        btnVerOriginal.setEnabled(true);
+        btnZoomIn.setEnabled(true);
+        btnZoomOut.setEnabled(true);
+        comboTrabalho1.setEnabled(true);
+        comboAngulo.setEnabled(true);
     }
 
 
@@ -358,26 +412,54 @@ private void comboAnguloInputMethodTextChanged(java.awt.event.InputMethodEvent e
 private void comboAnguloStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_comboAnguloStateChanged
     
     controller.transformTrabalhoDois(Float.parseFloat(comboAngulo.getValue().toString()));
+    lblImagemProcessada.setSize(2048, 2048);
        
 }//GEN-LAST:event_comboAnguloStateChanged
 
 private void btnZoomInActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomInActionPerformed
     zoom++;
-    zoom = zoom == -1 ? 0 : zoom;
+    zoom = zoom == -3 ? -2 : zoom;
     controller.transformZoom(zoom);
-    btnZoomOut.setEnabled(zoom > -2);
+
+    btnZoomOut.setEnabled(zoom > -4 && zoom < 4);
+    btnOriginal.setEnabled( true );
 }//GEN-LAST:event_btnZoomInActionPerformed
 
 private void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnZoomOutActionPerformed
     zoom--;
-    zoom = zoom == -1 ? -2 : zoom;
+            
+    zoom = zoom == -3 ? -4 : zoom;
+
     controller.transformZoom(zoom);
-    btnZoomOut.setEnabled(zoom > -2);
+
+    btnZoomOut.setEnabled( zoom > -4);
+    btnOriginal.setEnabled( true );
 }//GEN-LAST:event_btnZoomOutActionPerformed
 
     private void btnEspelharActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEspelharActionPerformed
-        controller.transformEspelhada();
+        if( "Espelhar".equals(btnEspelhar.getText()) )
+        {
+            controller.transformEspelhada();
+            btnEspelhar.setText("Original");
+        }
+        else
+        {
+            controller.setPBImage();
+            btnEspelhar.setText("Espelhar");
+        }
+        
     }//GEN-LAST:event_btnEspelharActionPerformed
+
+    private void btnVerOriginalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerOriginalActionPerformed
+        
+        new OriginalImage(controller.getImagem().getBufferedImage());
+
+    }//GEN-LAST:event_btnVerOriginalActionPerformed
+
+    private void btnOriginalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOriginalActionPerformed
+        controller.setPBImage();
+        btnOriginal.setEnabled(false);
+    }//GEN-LAST:event_btnOriginalActionPerformed
 
     /**
      * @param args the command line arguments
@@ -421,6 +503,8 @@ private void btnZoomOutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
     private javax.swing.JButton btImageChooser;
     private javax.swing.JButton btnEspelhar;
     private javax.swing.JButton btnHistograma;
+    private javax.swing.JButton btnOriginal;
+    private javax.swing.JButton btnVerOriginal;
     private javax.swing.JButton btnZoomIn;
     private javax.swing.JButton btnZoomOut;
     private javax.swing.JSpinner comboAngulo;

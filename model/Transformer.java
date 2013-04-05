@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.Raster;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,16 +37,26 @@ public class Transformer {
         
         return bufferImage;
     }
+
+    public BufferedImage getPBImage(BufferedImage bfImagem)
+    {        
+        bufferImage = new BufferedImage(bfImagem.getWidth(), bfImagem.getHeight(), BufferedImage.TYPE_BYTE_GRAY);  
+        for( int w = 0; w < bfImagem.getWidth(); w++ )
+        {
+            for( int h = 0; h < bfImagem.getHeight(); h++ )
+            {
+                bufferImage.setRGB(w, h, bfImagem.getRGB(w, h));
+            }
+        }
+
+        
+        return bufferImage;
+    }
     
     
     public BufferedImage getResizedImage(BufferedImage originalImage, int width, int height)
     {
-        BufferedImage resizedImage = new BufferedImage(width, height, originalImage.getType());
-	Graphics2D g = resizedImage.createGraphics();
-	g.drawImage(originalImage, 0, 0, width, height, null);
-	g.dispose();
-        
-        return resizedImage;
+        return Resize.resize(originalImage, width, height);
     }
 
     public BufferedImage getBufferedTrabalhoUm(int option)
@@ -168,7 +181,7 @@ public class Transformer {
     {
         BufferedImage imagemEspelhada = new BufferedImage(imagem.getBufferedImage().getWidth(), imagem.getBufferedImage().getHeight(), BufferedImage.TYPE_INT_RGB);
         int[] invertida = imagem.getBufferedImage().getRGB(0, 0, imagem.getBufferedImage().getWidth(), imagem.getBufferedImage().getHeight(), null, 0, imagem.getBufferedImage().getWidth());
-        int aux = 0;
+        int aux;
         
         for (int lin = 0; lin < imagem.getBufferedImage().getHeight(); lin++) 
         {
@@ -186,15 +199,17 @@ public class Transformer {
     }
 
     
-    public BufferedImage getRotatedImage(float angle) 
+    public BufferedImage getRotatedImage(float angle, int oW, int oH) 
     {
+        //angle += 270
+        BufferedImage image = getResizedImage(getPBImage(), oW , oH);
         
-        int width = imagem.getBufferedImage().getWidth();
-        int height = imagem.getBufferedImage().getHeight();
+        int width = image.getWidth();
+        int height = image.getHeight();
         
-    	BufferedImage imageR = new BufferedImage(width, height, imagem.getBufferedImage().getType());
+    	BufferedImage imageR = new BufferedImage(2048, 2048, image.getType());
     	int nbands = imageR.getSampleModel().getNumBands();
-    	Raster inputRaster = imagem.getBufferedImage().getData();
+    	Raster inputRaster = image.getData();
     	int[] pixels = new int[nbands * width * height];
     	inputRaster.getPixels(0,0,width,height,pixels);
     	
@@ -205,14 +220,14 @@ public class Transformer {
         int halfWidth  = width / 2;
     	int halfHeight = height / 2;
     	
-    	int newLin = 0;
-    	int newCol = 0;
+    	int newLin;
+    	int newCol;
     	
     	int linMaisNegativa = 0;
     	int colMaisNegativa = 0;
     	
-    	int linOffset = 0;
-    	int colOffset = 0;
+    	int linOffset;
+    	int colOffset;
     	
     	// Verifica limites fora do canvas
     	
@@ -250,14 +265,15 @@ public class Transformer {
     	linOffset = linMaisNegativa * -1;
         colOffset = colMaisNegativa * -1;
     	
-    	// Multiplica as matrizes para obter a rota��o desejada
+    	// Multiplica as matrizes para obter a rotação desejada
     	
     	for (int h = 0; h < height; h++)
         {
             for (int w = 0; w < width; w++) 
             {
-                int rgb = imagem.getBufferedImage().getRGB(h, w);
-
+               // System.out.println(h + " " + w);
+                int rgb = image.getRGB(w, h);
+               // inputRaster.getSample(h, w, 0);
                 newLin = (int) 
                         (
                              ((w - halfWidth) * cosenoAngulo) 
@@ -268,12 +284,7 @@ public class Transformer {
                             ((h-halfHeight)*cosenoAngulo) 
                           - ((w-halfWidth)*senoAngulo)
                         );
-/*
-                if (h == 0) 
-                { 
-                    System.out.println("Lin: " + h + " NewLin: " + newLin + " Col: " + w + " NewCol: " + newCol);
-                }   
-*/
+
                 newLin = newLin + linOffset;
                 newCol = newCol + colOffset;
                     

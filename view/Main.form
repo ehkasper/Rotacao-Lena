@@ -35,28 +35,37 @@
                   <Group type="102" alignment="0" attributes="0">
                       <Component id="btImageChooser" min="-2" pref="151" max="-2" attributes="0"/>
                       <EmptySpace max="-2" attributes="0"/>
-                      <Component id="fieldImagePath" min="-2" pref="524" max="-2" attributes="0"/>
+                      <Component id="fieldImagePath" max="32767" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="lblImagemOriginal" alignment="0" min="-2" max="-2" attributes="0"/>
+                          <Group type="102" alignment="0" attributes="0">
+                              <Component id="lblImagemOriginal" min="-2" max="-2" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="btnVerOriginal" min="-2" max="-2" attributes="0"/>
+                          </Group>
                           <Component id="panelValues" min="-2" max="-2" attributes="1"/>
                           <Component id="lblResizebleImage" alignment="0" min="-2" pref="412" max="-2" attributes="2"/>
                       </Group>
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
-                              <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
-                              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                          <Group type="102" alignment="0" attributes="0">
-                              <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="lblImagemProcessada" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="panelProcessedImage" alignment="0" min="-2" pref="434" max="-2" attributes="1"/>
+                                  <Group type="102" attributes="0">
+                                      <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
+                                      <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
+                                      <Component id="lblImagemProcessada" min="-2" max="-2" attributes="0"/>
+                                  </Group>
                               </Group>
+                              <EmptySpace min="80" pref="92" max="32767" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
+                              <Component id="panelProcessedImage" max="32767" attributes="1"/>
                           </Group>
                       </Group>
-                      <EmptySpace min="-2" pref="80" max="-2" attributes="0"/>
                   </Group>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
@@ -68,20 +77,21 @@
           <Group type="102" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btImageChooser" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btImageChooser" alignment="3" min="-2" pref="54" max="-2" attributes="0"/>
                   <Component id="fieldImagePath" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace pref="10" max="32767" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
                   <Component id="lblImagemOriginal" alignment="3" min="-2" max="-2" attributes="0"/>
                   <Component id="lblImagemProcessada" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnVerOriginal" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
-              <EmptySpace min="-2" pref="8" max="-2" attributes="0"/>
-              <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="panelProcessedImage" pref="377" max="32767" attributes="1"/>
-                  <Component id="lblResizebleImage" min="-2" pref="376" max="-2" attributes="1"/>
+              <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
+              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                  <Component id="lblResizebleImage" max="32767" attributes="1"/>
+                  <Component id="panelProcessedImage" pref="408" max="32767" attributes="1"/>
               </Group>
-              <EmptySpace max="-2" attributes="0"/>
+              <EmptySpace max="32767" attributes="0"/>
               <Group type="103" groupAlignment="1" attributes="0">
                   <Component id="jPanel1" max="32767" attributes="1"/>
                   <Component id="panelValues" min="-2" max="-2" attributes="1"/>
@@ -94,6 +104,12 @@
   <SubComponents>
     <Component class="javax.swing.JButton" name="btImageChooser">
       <Properties>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="fc" green="fc" red="fb" type="rgb"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="2c" green="2c" red="23" type="rgb"/>
+        </Property>
         <Property name="text" type="java.lang.String" value="Escolher Imagem"/>
         <Property name="toolTipText" type="java.lang.String" value="Ao clicar, escolha uma imagem a partir de seu computador"/>
       </Properties>
@@ -173,6 +189,7 @@
         <Component class="javax.swing.JButton" name="btnHistograma">
           <Properties>
             <Property name="text" type="java.lang.String" value="Histograma"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnHistogramaActionPerformed"/>
@@ -185,6 +202,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblMediana">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -203,6 +221,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblMedia">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -216,6 +235,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblVariancia">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -234,6 +254,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="lblModa">
           <Properties>
+            <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                 <LineBorder/>
@@ -257,7 +278,7 @@
     </Container>
     <Component class="javax.swing.JLabel" name="lblImagemOriginal">
       <Properties>
-        <Property name="text" type="java.lang.String" value="Imagem Original"/>
+        <Property name="text" type="java.lang.String" value="Imagem Original em tamanho redimensionado"/>
       </Properties>
     </Component>
     <Component class="javax.swing.JLabel" name="lblImagemProcessada">
@@ -289,7 +310,9 @@
                   <Component id="btnZoomIn" min="-2" pref="42" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="btnZoomOut" min="-2" pref="39" max="-2" attributes="0"/>
-                  <EmptySpace pref="54" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="btnOriginal" min="-2" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -308,6 +331,7 @@
                       <Component id="btnZoomIn" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnZoomOut" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEspelhar" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnOriginal" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
@@ -332,6 +356,7 @@
                 <StringItem index="5" value="E"/>
               </StringArray>
             </Property>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="comboTrabalho1ActionPerformed"/>
@@ -343,6 +368,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JSpinner" name="comboAngulo">
+          <Properties>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
           <Events>
             <EventHandler event="stateChanged" listener="javax.swing.event.ChangeListener" parameters="javax.swing.event.ChangeEvent" handler="comboAnguloStateChanged"/>
             <EventHandler event="inputMethodTextChanged" listener="java.awt.event.InputMethodListener" parameters="java.awt.event.InputMethodEvent" handler="comboAnguloInputMethodTextChanged"/>
@@ -351,6 +379,7 @@
         <Component class="javax.swing.JButton" name="btnZoomIn">
           <Properties>
             <Property name="text" type="java.lang.String" value="+"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnZoomInActionPerformed"/>
@@ -359,6 +388,7 @@
         <Component class="javax.swing.JButton" name="btnZoomOut">
           <Properties>
             <Property name="text" type="java.lang.String" value="-"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnZoomOutActionPerformed"/>
@@ -367,9 +397,20 @@
         <Component class="javax.swing.JButton" name="btnEspelhar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Espelhar"/>
+            <Property name="enabled" type="boolean" value="false"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEspelharActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnOriginal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Ajustar"/>
+            <Property name="toolTipText" type="java.lang.String" value="Clique para ajustar a imagem ao seu estado original"/>
+            <Property name="enabled" type="boolean" value="false"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnOriginalActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -377,9 +418,7 @@
     <Component class="javax.swing.JLabel" name="lblResizebleImage">
       <Properties>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-            <LineBorder/>
-          </Border>
+          <Border info="null"/>
         </Property>
       </Properties>
       <AuxValues>
@@ -388,8 +427,18 @@
     </Component>
     <Container class="javax.swing.JScrollPane" name="panelProcessedImage">
       <Properties>
-        <Property name="horizontalScrollBarPolicy" type="int" value="32"/>
-        <Property name="verticalScrollBarPolicy" type="int" value="22"/>
+        <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
+        <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+          <Color blue="ff" green="ff" red="ff" type="rgb"/>
+        </Property>
+        <Property name="viewportBorder" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+          <Border info="null"/>
+        </Property>
       </Properties>
       <AuxValues>
         <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
@@ -399,11 +448,13 @@
       <SubComponents>
         <Component class="javax.swing.JLabel" name="lblProcessedImage">
           <Properties>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder/>
-              </Border>
+            <Property name="background" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
             </Property>
+            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+              <Border info="null"/>
+            </Property>
+            <Property name="opaque" type="boolean" value="true"/>
           </Properties>
           <Events>
             <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblProcessedImageMouseEntered"/>
@@ -414,5 +465,14 @@
         </Component>
       </SubComponents>
     </Container>
+    <Component class="javax.swing.JButton" name="btnVerOriginal">
+      <Properties>
+        <Property name="text" type="java.lang.String" value="Ver Original"/>
+        <Property name="enabled" type="boolean" value="false"/>
+      </Properties>
+      <Events>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVerOriginalActionPerformed"/>
+      </Events>
+    </Component>
   </SubComponents>
 </Form>
